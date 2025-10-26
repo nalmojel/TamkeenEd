@@ -47,6 +47,7 @@ class DefaultFirebaseOptions {
     projectId: 'tamkeened-8821e',
     authDomain: 'tamkeened-8821e.firebaseapp.com',
     storageBucket: 'tamkeened-8821e.firebasestorage.app',
+    databaseURL: 'https://tamkeened-8821e-default-rtdb.asia-southeast1.firebasedatabase.app',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
@@ -55,6 +56,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '636186498723',
     projectId: 'tamkeened-8821e',
     storageBucket: 'tamkeened-8821e.firebasestorage.app',
+    databaseURL: 'https://tamkeened-8821e-default-rtdb.asia-southeast1.firebasedatabase.app',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
@@ -63,6 +65,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '636186498723',
     projectId: 'tamkeened-8821e',
     storageBucket: 'tamkeened-8821e.firebasestorage.app',
+    databaseURL: 'https://tamkeened-8821e-default-rtdb.asia-southeast1.firebasedatabase.app',
     iosClientId: '636186498723-tamkeened.apps.googleusercontent.com',
     iosBundleId: 'com.tamkeen.tamkeened',
   );
@@ -73,6 +76,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '636186498723',
     projectId: 'tamkeened-8821e',
     storageBucket: 'tamkeened-8821e.firebasestorage.app',
+    databaseURL: 'https://tamkeened-8821e-default-rtdb.asia-southeast1.firebasedatabase.app',
     iosClientId: '636186498723-tamkeened.apps.googleusercontent.com',
     iosBundleId: 'com.tamkeen.tamkeened',
   );
@@ -84,5 +88,6 @@ class DefaultFirebaseOptions {
     projectId: 'tamkeened-8821e',
     authDomain: 'tamkeened-8821e.firebaseapp.com',
     storageBucket: 'tamkeened-8821e.firebasestorage.app',
+    databaseURL: 'https://tamkeened-8821e-default-rtdb.asia-southeast1.firebasedatabase.app',
   );
 }

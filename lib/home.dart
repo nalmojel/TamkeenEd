@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
+import 'package:stop_watch_timer/stop_watch_timer.dart';
 import 'firebase_auth.dart';
 import 'login_screen.dart';
+import 'ADHD.dart';
+import 'profile.dart';
+import 'visual.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -15,17 +19,15 @@ class _HomePageState extends State<HomePage> {
 
   final List<Widget> _pages = [
     const HomeTabPage(),
-    const DiscoveryTabPage(),
-    const PublishTabPage(),
-    const MessageTabPage(),
-    const ProfileTabPage(),
+    const VisualPage(),
+    const ADHDPage(),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color(0xFF4CAF50),
+        backgroundColor: const Color(0xFF7B2D93),
         foregroundColor: Colors.white,
         elevation: 2,
         leading: Builder(
@@ -55,7 +57,7 @@ class _HomePageState extends State<HomePage> {
       body: _pages[_currentIndex],
       bottomNavigationBar: ConvexAppBar(
         style: TabStyle.reactCircle,
-        backgroundColor: const Color(0xFF4CAF50), // Green color to match app theme
+        backgroundColor: const Color(0xFF7B2D93), // Purple color to match app theme
         activeColor: Colors.white,
         color: Colors.white70,
         height: 60,
@@ -63,10 +65,8 @@ class _HomePageState extends State<HomePage> {
         top: -25,
         items: const [
           TabItem(icon: Icons.home, title: 'Home'),
-          TabItem(icon: Icons.explore, title: 'Discovery'),
-          TabItem(icon: Icons.add, title: 'Publish'),
-          TabItem(icon: Icons.message, title: 'Message'),
-          TabItem(icon: Icons.person, title: 'Profile'),
+          TabItem(icon: Icons.visibility, title: 'Visual'),
+          TabItem(icon: Icons.psychology, title: 'ADHD'),
         ],
         initialActiveIndex: _currentIndex,
         onTap: (index) {
@@ -106,7 +106,7 @@ class HomeTabPage extends StatelessWidget {
             padding: const EdgeInsets.all(20),
             decoration: BoxDecoration(
               gradient: const LinearGradient(
-                colors: [Color(0xFF4CAF50), Color(0xFF2E7D32)],
+                colors: [Color(0xFF7B2D93), Color(0xFF5D1A73)],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
               ),
@@ -305,7 +305,7 @@ class HomeTabPage extends StatelessWidget {
           LinearProgressIndicator(
             value: progress,
             backgroundColor: Colors.grey[200],
-            valueColor: const AlwaysStoppedAnimation<Color>(Color(0xFF4CAF50)),
+            valueColor: const AlwaysStoppedAnimation<Color>(Color(0xFF7B2D93)),
           ),
           const SizedBox(height: 8),
           Text(
@@ -313,80 +313,6 @@ class HomeTabPage extends StatelessWidget {
             style: TextStyle(
               color: Colors.grey[600],
               fontSize: 12,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-// Discovery Tab Page
-class DiscoveryTabPage extends StatelessWidget {
-  const DiscoveryTabPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(
-            Icons.explore,
-            size: 64,
-            color: Color(0xFF4CAF50),
-          ),
-          SizedBox(height: 16),
-          Text(
-            'Discovery',
-            style: TextStyle(
-              fontSize: 24,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          SizedBox(height: 8),
-          Text(
-            'Explore new content and courses',
-            style: TextStyle(
-              color: Colors.grey,
-              fontSize: 16,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-// Publish Tab Page
-class PublishTabPage extends StatelessWidget {
-  const PublishTabPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(
-            Icons.add_circle,
-            size: 64,
-            color: Color(0xFF4CAF50),
-          ),
-          SizedBox(height: 16),
-          Text(
-            'Publish',
-            style: TextStyle(
-              fontSize: 24,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          SizedBox(height: 8),
-          Text(
-            'Create and share new content',
-            style: TextStyle(
-              color: Colors.grey,
-              fontSize: 16,
             ),
           ),
         ],
@@ -408,7 +334,7 @@ class MessageTabPage extends StatelessWidget {
           Icon(
             Icons.message,
             size: 64,
-            color: Color(0xFF4CAF50),
+            color: Color(0xFF7B2D93),
           ),
           SizedBox(height: 16),
           Text(
@@ -445,7 +371,7 @@ class CoursesTabPage extends StatelessWidget {
           Icon(
             Icons.book,
             size: 64,
-            color: Color(0xFF4CAF50),
+            color: Color(0xFF7B2D93),
           ),
           SizedBox(height: 16),
           Text(
@@ -482,7 +408,7 @@ class ProgressTabPage extends StatelessWidget {
           Icon(
             Icons.trending_up,
             size: 64,
-            color: Color(0xFF4CAF50),
+            color: Color(0xFF7B2D93),
           ),
           SizedBox(height: 16),
           Text(
@@ -495,43 +421,6 @@ class ProgressTabPage extends StatelessWidget {
           SizedBox(height: 8),
           Text(
             'Track your learning progress',
-            style: TextStyle(
-              color: Colors.grey,
-              fontSize: 16,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-// Profile Tab Page
-class ProfileTabPage extends StatelessWidget {
-  const ProfileTabPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(
-            Icons.person,
-            size: 64,
-            color: Color(0xFF4CAF50),
-          ),
-          SizedBox(height: 16),
-          Text(
-            'Profile',
-            style: TextStyle(
-              fontSize: 24,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          SizedBox(height: 8),
-          Text(
-            'Manage your account settings',
             style: TextStyle(
               color: Colors.grey,
               fontSize: 16,
@@ -556,7 +445,7 @@ class AppDrawer extends StatelessWidget {
           DrawerHeader(
             decoration: const BoxDecoration(
               gradient: LinearGradient(
-                colors: [Color(0xFF4CAF50), Color(0xFF2E7D32)],
+                colors: [Color(0xFF7B2D93), Color(0xFF5D1A73)],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
               ),
@@ -580,7 +469,7 @@ class AppDrawer extends StatelessWidget {
                         return const Icon(
                           Icons.school,
                           size: 36,
-                          color: Color(0xFF4CAF50),
+                          color: Color(0xFF7B2D93),
                         );
                       },
                     ),
@@ -610,26 +499,17 @@ class AppDrawer extends StatelessWidget {
             title: const Text('Home'),
             onTap: () => Navigator.pop(context),
           ),
-          ListTile(
-            leading: const Icon(Icons.book),
-            title: const Text('My Courses'),
-            onTap: () => Navigator.pop(context),
-          ),
-          ListTile(
-            leading: const Icon(Icons.schedule),
-            title: const Text('Schedule'),
-            onTap: () => Navigator.pop(context),
-          ),
-          ListTile(
-            leading: const Icon(Icons.assignment),
-            title: const Text('Assignments'),
-            onTap: () => Navigator.pop(context),
-          ),
           const Divider(),
           ListTile(
             leading: const Icon(Icons.settings),
-            title: const Text('Settings'),
-            onTap: () => Navigator.pop(context),
+            title: const Text('Profile Settings'),
+            onTap: () {
+              Navigator.pop(context);
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const ProfileScreen()),
+              );
+            },
           ),
           ListTile(
             leading: const Icon(Icons.help),
@@ -657,9 +537,14 @@ class AppDrawer extends StatelessWidget {
 }
 
 // Notifications Modal
-class NotificationsModal extends StatelessWidget {
+class NotificationsModal extends StatefulWidget {
   const NotificationsModal({super.key});
 
+  @override
+  State<NotificationsModal> createState() => _NotificationsModalState();
+}
+
+class _NotificationsModalState extends State<NotificationsModal> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -686,31 +571,122 @@ class NotificationsModal extends StatelessWidget {
           ),
           const Divider(),
           Expanded(
-            child: ListView(
-              children: [
-                _buildNotificationItem(
-                  icon: Icons.assignment,
-                  title: 'New Assignment Available',
-                  subtitle: 'Mathematics Chapter 5 assignment is now available',
-                  time: '2 hours ago',
-                ),
-                _buildNotificationItem(
-                  icon: Icons.grade,
-                  title: 'Grade Posted',
-                  subtitle: 'Your Science quiz grade has been posted',
-                  time: '1 day ago',
-                ),
-                _buildNotificationItem(
-                  icon: Icons.event,
-                  title: 'Upcoming Class',
-                  subtitle: 'Physics class starts in 30 minutes',
-                  time: '2 days ago',
-                ),
-              ],
+            child: Consumer<FocusTimerService>(
+              builder: (context, timerService, child) {
+                return ListView(
+                  children: [
+                    // Show running timer notification if timer is active
+                    if (timerService.isRunning || timerService.stopWatchTimer.rawTime.value > 0)
+                      _buildTimerNotification(timerService),
+                    
+                    // Regular notifications
+                    _buildNotificationItem(
+                      icon: Icons.assignment,
+                      title: 'New Assignment Available',
+                      subtitle: 'Mathematics Chapter 5 assignment is now available',
+                      time: '2 hours ago',
+                    ),
+                    _buildNotificationItem(
+                      icon: Icons.grade,
+                      title: 'Grade Posted',
+                      subtitle: 'Your Science quiz grade has been posted',
+                      time: '1 day ago',
+                    ),
+                    _buildNotificationItem(
+                      icon: Icons.event,
+                      title: 'Upcoming Class',
+                      subtitle: 'Physics class starts in 30 minutes',
+                      time: '2 days ago',
+                    ),
+                  ],
+                );
+              },
             ),
           ),
         ],
       ),
+    );
+  }
+
+  Widget _buildTimerNotification(FocusTimerService timerService) {
+    return StreamBuilder<int>(
+      stream: timerService.stopWatchTimer.rawTime,
+      initialData: timerService.stopWatchTimer.rawTime.value,
+      builder: (context, snapshot) {
+        final value = snapshot.data ?? 0;
+        final displayTime = StopWatchTimer.getDisplayTime(
+          value,
+          hours: false,
+          milliSecond: false,
+        );
+        
+        final isRunning = timerService.isRunning;
+        final isCompleted = timerService.isCompleted;
+        
+        String title;
+        String subtitle;
+        IconData icon;
+        Color color;
+        
+        if (isCompleted) {
+          title = 'Focus Session Complete!';
+          subtitle = 'Great job! You completed your focus session.';
+          icon = Icons.celebration;
+          color = Colors.green;
+        } else if (isRunning) {
+          title = 'Focus Session Active';
+          subtitle = 'Keep focusing! Time remaining: $displayTime';
+          icon = Icons.timer;
+          color = const Color(0xFF7B2D93);
+        } else if (value > 0) {
+          title = 'Focus Session Paused';
+          subtitle = 'Time remaining: $displayTime';
+          icon = Icons.pause_circle;
+          color = Colors.orange;
+        } else {
+          return const SizedBox.shrink();
+        }
+        
+        return Container(
+          margin: const EdgeInsets.only(bottom: 8),
+          decoration: BoxDecoration(
+            color: color.withOpacity(0.1),
+            borderRadius: BorderRadius.circular(12),
+            border: Border.all(color: color.withOpacity(0.3)),
+          ),
+          child: ListTile(
+            leading: CircleAvatar(
+              backgroundColor: color.withOpacity(0.2),
+              child: Icon(icon, color: color),
+            ),
+            title: Text(
+              title,
+              style: TextStyle(
+                fontWeight: FontWeight.w600,
+                color: color,
+              ),
+            ),
+            subtitle: Text(
+              subtitle,
+              style: TextStyle(color: color.withOpacity(0.8)),
+            ),
+            trailing: isRunning
+                ? Icon(Icons.access_time, color: color, size: 20)
+                : isCompleted
+                    ? Icon(Icons.check_circle, color: color, size: 20)
+                    : Icon(Icons.pause, color: color, size: 20),
+            onTap: () {
+              Navigator.pop(context);
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const FocusTimerScreen(),
+                ),
+              );
+            },
+          ),
+        );
+      },
     );
   }
 
@@ -722,8 +698,8 @@ class NotificationsModal extends StatelessWidget {
   }) {
     return ListTile(
       leading: CircleAvatar(
-        backgroundColor: const Color(0xFF4CAF50).withOpacity(0.1),
-        child: Icon(icon, color: const Color(0xFF4CAF50)),
+        backgroundColor: const Color(0xFF7B2D93).withOpacity(0.1),
+        child: Icon(icon, color: const Color(0xFF7B2D93)),
       ),
       title: Text(
         title,
