@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'firebase_auth.dart';
 import 'login_screen.dart';
+import 'ADHD.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -17,7 +18,7 @@ class _HomePageState extends State<HomePage> {
     const HomeTabPage(),
     const DiscoveryTabPage(),
     const PublishTabPage(),
-    const MessageTabPage(),
+    const ADHDPage(),
     const ProfileTabPage(),
   ];
 
@@ -65,7 +66,7 @@ class _HomePageState extends State<HomePage> {
           TabItem(icon: Icons.home, title: 'Home'),
           TabItem(icon: Icons.explore, title: 'Discovery'),
           TabItem(icon: Icons.add, title: 'Publish'),
-          TabItem(icon: Icons.message, title: 'Message'),
+          TabItem(icon: Icons.psychology, title: 'ADHD'),
           TabItem(icon: Icons.person, title: 'Profile'),
         ],
         initialActiveIndex: _currentIndex,
