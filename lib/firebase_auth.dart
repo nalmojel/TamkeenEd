@@ -1,5 +1,6 @@
-import 'package:firebase_core/firebase_core.dart';
+ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'firebase_options.dart';
 
@@ -8,11 +9,29 @@ class FirebaseAuthService {
   static final String _rememberMeKey = 'remember_me';
   static final String _savedEmailKey = 'saved_email';
 
+  // Get Firebase Database reference with correct URL
+  static DatabaseReference _getDatabaseReference() {
+    return FirebaseDatabase.instanceFor(
+      app: Firebase.app(),
+      databaseURL: 'https://tamkeened-8821e-default-rtdb.asia-southeast1.firebasedatabase.app',
+    ).ref();
+  }
+
   // Initialize Firebase
   static Future<void> initializeFirebase() async {
-    await Firebase.initializeApp(
-      options: DefaultFirebaseOptions.currentPlatform,
-    );
+    try {
+      await Firebase.initializeApp(
+        options: DefaultFirebaseOptions.currentPlatform,
+      );
+    } catch (e) {
+      // Firebase is already initialized, which is fine
+      if (e.toString().contains('duplicate-app')) {
+        print('Firebase already initialized');
+      } else {
+        // Re-throw if it's a different error
+        rethrow;
+      }
+    }
   }
 
   // Get current user
@@ -30,18 +49,43 @@ class FirebaseAuthService {
     required String password,
     required String firstName,
     required String lastName,
+    String? phoneNumber,
   }) async {
     try {
+      print('🚀 Starting signup process...');
+      print('📧 Email: $email');
+      print('👤 Name: $firstName $lastName');
+      
       final UserCredential userCredential = await _auth.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
 
+      print('✅ Firebase Auth user created successfully');
+      print('🔑 UID: ${userCredential.user?.uid}');
+
       // Update display name
       await userCredential.user?.updateDisplayName('$firstName $lastName');
+      print('✅ Display name updated');
+
+      // Save user profile to Realtime Database
+      if (userCredential.user != null) {
+        print('💾 Calling _saveUserProfile...');
+        await _saveUserProfile(
+          userCredential.user!.uid,
+          firstName,
+          lastName,
+          email,
+          phoneNumber,
+        );
+        print('✅ _saveUserProfile completed');
+      } else {
+        print('❌ User is null, cannot save profile');
+      }
 
       // Send email verification
       await userCredential.user?.sendEmailVerification();
+      print('📧 Email verification sent');
 
       return AuthResult(
         success: true,
@@ -49,11 +93,13 @@ class FirebaseAuthService {
         message: 'Account created successfully! Please check your email for verification.',
       );
     } on FirebaseAuthException catch (e) {
+      print('❌ FirebaseAuthException: ${e.code} - ${e.message}');
       return AuthResult(
         success: false,
         message: _getErrorMessage(e.code),
       );
     } catch (e) {
+      print('❌ General exception during signup: $e');
       return AuthResult(
         success: false,
         message: 'An unexpected error occurred. Please try again.',
@@ -154,6 +200,77 @@ class FirebaseAuthService {
     final prefs = await SharedPreferences.getInstance();
     await prefs.remove(_rememberMeKey);
     await prefs.remove(_savedEmailKey);
+  }
+
+  // Save user profile to Realtime Database
+  static Future<void> _saveUserProfile(
+    String uid,
+    String firstName,
+    String lastName,
+    String email,
+    String? phoneNumber,
+  ) async {
+    try {
+      print('🔄 Attempting to save user profile for UID: $uid');
+      print('📧 Email: $email');
+      print('👤 Name: $firstName $lastName');
+      print('📱 Phone: ${phoneNumber ?? "Not provided"}');
+      
+      final dbRef = _getDatabaseReference();
+      
+      final profileData = {
+        'firstName': firstName,
+        'lastName': lastName,
+        'email': email,
+        'createdAt': DateTime.now().toIso8601String(),
+        'lastUpdated': DateTime.now().toIso8601String(),
+      };
+      
+      if (phoneNumber != null && phoneNumber.isNotEmpty) {
+        profileData['phoneNumber'] = phoneNumber;
+      }
+      
+      print('💾 Profile data to save: $profileData');
+      
+      await dbRef.child('users').child(uid).set(profileData);
+      
+      print('✅ User profile saved successfully!');
+    } catch (e) {
+      // Log error but don't throw to avoid breaking signup flow
+      print('❌ Error saving user profile: $e');
+      print('📍 Stack trace: ${StackTrace.current}');
+    }
+  }
+
+  // Get user profile from Realtime Database
+  static Future<Map<String, dynamic>?> getUserProfile(String uid) async {
+    try {
+      final dbRef = _getDatabaseReference();
+      final snapshot = await dbRef.child('users').child(uid).get();
+      if (snapshot.exists) {
+        return Map<String, dynamic>.from(snapshot.value as Map);
+      }
+      return null;
+    } catch (e) {
+      print('Error getting user profile: $e');
+      return null;
+    }
+  }
+
+  // Update user profile in Realtime Database
+  static Future<bool> updateUserProfile(
+    String uid,
+    Map<String, dynamic> profileData,
+  ) async {
+    try {
+      final dbRef = _getDatabaseReference();
+      profileData['lastUpdated'] = DateTime.now().toIso8601String();
+      await dbRef.child('users').child(uid).update(profileData);
+      return true;
+    } catch (e) {
+      print('Error updating user profile: $e');
+      return false;
+    }
   }
 
   // Get error message for Firebase Auth exceptions

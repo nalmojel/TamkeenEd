@@ -101,8 +101,8 @@ class _LoginScreenState extends State<LoginScreen> {
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
             colors: [
-              Color(0xFF4CAF50), // Green
-              Color(0xFF2E7D32), // Darker green
+              Color(0xFF7B2D93), // Purple
+              Color(0xFF5D1A73), // Darker purple
             ],
           ),
         ),
@@ -142,7 +142,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 return const Icon(
                                   Icons.school,
                                   size: 48,
-                                  color: Color(0xFF4CAF50),
+                                  color: Color(0xFF7B2D93),
                                 );
                               },
                             ),
@@ -154,7 +154,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           style: TextStyle(
                             fontSize: 28,
                             fontWeight: FontWeight.bold,
-                            color: Color(0xFF4CAF50),
+                            color: Color(0xFF7B2D93),
                           ),
                         ),
                         const SizedBox(height: 8),
@@ -185,7 +185,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                             focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(12),
-                              borderSide: const BorderSide(color: Color(0xFF4CAF50)),
+                              borderSide: const BorderSide(color: Color(0xFF7B2D93)),
                             ),
                           ),
                           validator: (value) {
@@ -227,7 +227,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                             focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(12),
-                              borderSide: const BorderSide(color: Color(0xFF4CAF50)),
+                              borderSide: const BorderSide(color: Color(0xFF7B2D93)),
                             ),
                           ),
                           validator: (value) {
@@ -250,7 +250,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   _rememberMe = value ?? false;
                                 });
                               },
-                              activeColor: const Color(0xFF4CAF50),
+                              activeColor: const Color(0xFF7B2D93),
                             ),
                             const Text('Remember me'),
                           ],
@@ -263,7 +263,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             child: const Text(
                               'Forgot Password?',
                               style: TextStyle(
-                                color: Color(0xFF4CAF50),
+                                color: Color(0xFF7B2D93),
                                 fontWeight: FontWeight.w500,
                               ),
                             ),
@@ -278,7 +278,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           child: ElevatedButton(
                             onPressed: _isLoading ? null : _handleLogin,
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: const Color(0xFF4CAF50),
+                              backgroundColor: const Color(0xFF7B2D93),
                               foregroundColor: Colors.white,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(12),
@@ -324,7 +324,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               child: const Text(
                                 'Sign Up',
                                 style: TextStyle(
-                                  color: Color(0xFF4CAF50),
+                                  color: Color(0xFF7B2D93),
                                   fontWeight: FontWeight.w600,
                                 ),
                               ),
@@ -413,7 +413,7 @@ class _ForgotPasswordModalState extends State<ForgotPasswordModal> {
                     style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
-                      color: Color(0xFF4CAF50),
+                      color: Color(0xFF7B2D93),
                     ),
                   ),
                   IconButton(
@@ -452,7 +452,7 @@ class _ForgotPasswordModalState extends State<ForgotPasswordModal> {
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
-                    borderSide: const BorderSide(color: Color(0xFF4CAF50)),
+                    borderSide: const BorderSide(color: Color(0xFF7B2D93)),
                   ),
                 ),
                 validator: (value) {
@@ -475,7 +475,7 @@ class _ForgotPasswordModalState extends State<ForgotPasswordModal> {
                     child: OutlinedButton(
                       onPressed: _isLoading ? null : () => Navigator.of(context).pop(),
                       style: OutlinedButton.styleFrom(
-                        side: const BorderSide(color: Color(0xFF4CAF50)),
+                        side: const BorderSide(color: Color(0xFF7B2D93)),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(12),
                         ),
@@ -484,7 +484,7 @@ class _ForgotPasswordModalState extends State<ForgotPasswordModal> {
                       child: const Text(
                         'Cancel',
                         style: TextStyle(
-                          color: Color(0xFF4CAF50),
+                          color: Color(0xFF7B2D93),
                           fontWeight: FontWeight.w600,
                         ),
                       ),
@@ -497,7 +497,7 @@ class _ForgotPasswordModalState extends State<ForgotPasswordModal> {
                     child: ElevatedButton(
                       onPressed: _isLoading ? null : _handleResetPassword,
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFF4CAF50),
+                        backgroundColor: const Color(0xFF7B2D93),
                         foregroundColor: Colors.white,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(12),
