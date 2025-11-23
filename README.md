@@ -3,11 +3,11 @@
 **Senior Capstone Project – SE499**  
 **Supervised by:** Dr. Basmah Alkanjr  
 **Team Members:**  
-- Aljazi Alghunaim  
+- Aljazi Alghunaim
+- Nouf Almojel  
 - Lara AlBaijan  
 - Rose Alraba  
 - Manar Altuwaim  
-- Nouf Almojel  
 
 ---
 
